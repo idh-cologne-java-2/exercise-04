@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class ATM {
+	int accountBalance = 100;
+
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
 	 * number to the function cashout(...) which actually does the calculation and
@@ -24,6 +26,12 @@ public class ATM {
 	}
 
 	public void cashout(int amount) {
+		if (amount < accountBalance) {
+			accountBalance = accountBalance - amount;
+			System.out.println("Ok, here is your money, enjoy!");
+		} else {
+			System.out.println("Sorry, not enough money in the bank.");
+		}
 
 	};
 
