@@ -12,43 +12,36 @@ Klicken Sie auf `Next >` und vergessen Sie im nächsten Dialog nicht, ihre GitHu
 
 Wählen Sie unter `Branch Selection` den Branch `main` aus, und danach das Verzeichnis auf ihrer lokalen Festplatte.
 
+Letzter Schritt: Das git-repository enthält auch ein Eclipse-Projekt, das sie importieren möchten. Wählen Sie dazu `Import existing Eclipse projects`.
 
+Danach sollte das Projekt als normales Eclipse-Projekt sichtbar sein. Im Kontextmenü sollte jetzt auch das `Team`-Untermenü sichtbar sein.
 
-## b) 
+## b) Branch
+Legen Sie einen neuen Branch an, den Sie so nennen wie Ihr GitHub-Benutzername ist (damit er eindeutig ist). Alle weiteren Änderungen machen Sie in Ihrem eigenen Branch.
 
+## c) ATM aktualisieren
 
+Als Basiscode innerhalb des Projektes finden Sie die Referenzlösung aus Übung 1. Wenn Sie lieber Ihre eigene Lösung für die Aufgabe verwenden möchten, kopieren Sie sie herein, und machen direkt einen Git-Commit, um diese erste Änderung festzuhalten.
 
-----
+Danach erweitern Sie die ATM-Klasse um zwei Aspekte:
 
-## a) Fehler finden
+1. Der Automat sollte verschiedene Konten verwalten können. D.h. dass Benutzer:innen im Dialog zunächst ihre Kontonummer angeben müssen, und danach den Betrag. Der Geldautomat weiß dann für alle inviduellen Benutzer:innen, wie viel Geld diese noch auf dem Konto haben.
 
-In der Datei `a/A.java` findet sich Code, der das folgende tun soll: Ein Array soll mit zufälligen Zahlen gefüllt werden. Ist die Summe der Zahlen im Array größer als 750, soll "Hello World" ausgegeben werden. Leider ist der Code voller Fehler. Finden und beheben Sie sie!
+2. Der Automat verwaltet außerdem, wie viel Bargeld er noch zur Verfügung hat. D.h. auch wenn eine Benutzerin genug Geld auf dem Konto hat, kann es sein, dass sie das Geld nicht bekommt, weil der Automat leer ist. Wenn eine Auszahlung passiert ist, sollte der Automat seinen Bargeldbestand jeweils aktualisieren.
 
-## b) Geldautomat
-
-In der Datei `b/ATM.java` finden Sie den Quellcode für einen Teil einer Geldautomaten-Steuerungslogik. Damit kann die folgende Interaktion durchgeführt werden:
+Folgende Interaktionen sollten also passieren können:
 
 ```
-exercise-01$ java b/ATM
+Enter your account number: 123
 Enter the amount to withdraw: 21
+Ok, here you go!
+Enter your account number: 234
 Enter the amount to withdraw: 452
-Enter the amount to withdraw: 5.6
+Sorry, you don't have enough money in the bank.
+Enter your account number: 345
+Enter the amount to withdraw: 56
+Sorry, the ATM doesn't have that much cash anymore.
 ```
 
-Wie Sie sehen, kann der Geldautomat nur mit ganzen Zahlen operieren und stürzt ab, wenn etwas anderes eingegeben wird. Es gibt verschiedene Verbesserungen, die wir in den nächsten Wochen am Geldautomat vornehmen wollen. Heute wollen wir die `ATM`-Klasse erstmal so verändern, dass sie überprüft, ob der Benutzer genug Geld zur Verfügung hat, und eine passende Fehlermeldung ausgibt, wenn das nicht der Fall ist. Der Kontostand sollte sich dann auch im Laufe einer Sitzung verändern, also mitgespeichert werden, wie viel die Benutzerin noch übrig hat. Wir gehen hier der Einfachheit halber davon aus, dass der Geldautomat immer genügend Bargeld zur Verfügung hat, und schreiben den initialen Kontostand "hart" in den Code.
-
-
-Eine Interaktion sollte also ungefähr so aussehen:
-```
-exercise-01$ java b/ATM
-Enter the amount to withdraw: 25
-Ok, here is your money, enjoy!
-Enter the amount to withdraw: 200
-Sorry, not enough money in the bank.
-Enter the amount to withdraw: exit
-```
-
-
-## c) GitHub-Account schicken
-
-Falls noch nicht geschehen, schicken Sie Ihren GitHub-Account an [nils.reiter@uni-koeln.de](mailto:nils.reiter@uni-koeln.de).
+## d) Commit und Push
+Committen Sie alle Ihre Änderungen am Quellcode, und pushen Sie den neuen Branch auf das remote namens `origin` (= GitHub). 
