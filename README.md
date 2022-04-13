@@ -47,3 +47,5 @@ Sorry, the ATM doesn't have that much cash anymore.
 
 ## d) Commit und Push
 Committen Sie alle Ihre Änderungen am Quellcode, und pushen Sie den neuen Branch auf das remote namens `origin` (= GitHub). 
+
+In Eclipse wählen Sie dazu `Team > Push to origin`.
