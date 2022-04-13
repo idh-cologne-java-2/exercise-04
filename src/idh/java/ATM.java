@@ -3,14 +3,6 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * Ich bin ein Kommentar!
- * 
- * diese Klasse repräsentiert einen ATM
- * 
- * @author reiterns
- *
- */
 public class ATM {
 	int accountBalance = 100;
 
