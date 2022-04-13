@@ -19,6 +19,8 @@ Danach sollte das Projekt als normales Eclipse-Projekt sichtbar sein. Im Kontext
 ## b) Branch
 Legen Sie einen neuen Branch an, den Sie so nennen wie Ihr GitHub-Benutzername ist (damit er eindeutig ist). Alle weiteren Änderungen machen Sie in Ihrem eigenen Branch.
 
+In Eclipse wählen Sie dazu mit `Team`-Kontextmenü die Option `Switch To` und dann `New Branch`.
+
 ## c) ATM aktualisieren
 
 Als Basiscode innerhalb des Projektes finden Sie die Referenzlösung aus Übung 1. Wenn Sie lieber Ihre eigene Lösung für die Aufgabe verwenden möchten, kopieren Sie sie herein, und machen direkt einen Git-Commit, um diese erste Änderung festzuhalten.
