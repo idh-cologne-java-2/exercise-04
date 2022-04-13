@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 /**
  * Ich bin ein Kommentar!
  * 
+ * diese Klasse repräsentiert einen ATM
+ * 
  * @author reiterns
  *
  */
