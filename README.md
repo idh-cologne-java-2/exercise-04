@@ -20,7 +20,7 @@ Fügen Sie eine neue Klasse `AccountIterator implements Iterator<Account>` hinzu
 Dass die Konten innerhalb des Geldautomaten gespeichert sind, ist ja keine sehr realistische Annahme. Ändern Sie den Code daher wie folgt:
 
 1. Fügen Sie eine neue Klasse `Bank` hinzu, die eine Anzahl an Konten speichern kann. Ein Geldautomat speichert dann eine Referenz auf eine Bank, anstelle der einzelnen Konten. Welcher Bank ein Geldautomat gehört, bekommt der Konstruktor des Geldautomaten übergeben. 
-2. Machen Sie die Bank nun `Iterable<Account>` und verwenden Sie innerhalb des Geldautomaten die `for`-Schleife mit Doppelpunkt (`for (Account account : bank) { ... }`) um das Konto zu suchen.
+2. Machen Sie die Bank nun `Iterable<Account>` und verwenden Sie innerhalb des Geldautomaten die `for`-Schleife mit Doppelpunkt (`for (Account account : bank) { ... }`) um das Konto zu suchen. Auch hier können Sie die Iterator-Klasse wieder als inner class realisieren. 
 
 ## d) Commit und Push
 Committen Sie alle Ihre Änderungen am Quellcode, und pushen Sie den neuen Branch auf das remote namens `origin` (= GitHub). 
