@@ -1,54 +1,26 @@
 Softwaretechnologie: Java 2
 
-# Übung 2
+# Übung 4
 
-Diese Übung wird erstmals als Branch auf GitHub eingereicht. Dazu gibt es unten recht kleinteilige Anweisungen, in späteren Übungen wird das nicht mehr so genau beschrieben.
 
-## a) Repository klonen und Eclipse-Projekt anlegen
+## a) Repository klonen und Branch erstellen
 
-Klonen Sie dieses Repository direkt in Eclipse, indem Sie `File > Import ...` wählen. Im Dialog danach wählen Sie den `Git`-Zweig und `Projects from Git`, gefolgt von `Clone URI`. Die URI bekommen Sie, indem Sie auf GitHub den grünen Knopf `Code` anklicken, und dann den mit https beschrifteten Link kopieren. Für diese Übung ist das `https://github.com/idh-cologne-java-2/exercise-02.git`.
+Klonen Sie dieses Repository direkt in Eclipse und importieren Sie das Projekt. Legen Sie einen neuen Branch an, den Sie nach Ihrem GitHub-Benutzernamen benennen.
 
-Klicken Sie auf `Next >` und vergessen Sie im nächsten Dialog nicht, ihre GitHub-Authentifizierungsdaten anzugeben (damit Sie später auch wieder etwas hochladen können).
+## b) Aufgabe 1
 
-Wählen Sie unter `Branch Selection` den Branch `main` aus, und danach das Verzeichnis auf ihrer lokalen Festplatte.
+Als Basiscode innerhalb des Projektes finden Sie die Referenzlösung aus Übung 2. Wenn Sie lieber Ihre eigene Lösung für die Aufgabe verwenden möchten, kopieren Sie sie herein, und machen direkt einen Git-Commit, um diese erste Änderung festzuhalten.
 
-Letzter Schritt: Das git-repository enthält auch ein Eclipse-Projekt, das sie importieren möchten. Wählen Sie dazu `Import existing Eclipse projects`.
+Wir wenden unser neu gewonnenes Wissen über Iteratoren jetzt auf die Kontos unserer fiktiven Bank an. Bisher waren die Konten ja in einem Array gespeichert, und das Array wurde durchsucht. 
 
-Danach sollte das Projekt als normales Eclipse-Projekt sichtbar sein. Im Kontextmenü sollte jetzt auch das `Team`-Untermenü sichtbar sein.
+Fügen Sie eine neue Klasse `AccountIterator implements Iterator<Account>` hinzu, der über die Konten iteriert. Diese Iterator-Klasse kann eine normale Klasse sein, die neben `Account` und `ATM` liegt, sie kann aber auch als [inner class](https://dh-cologne.github.io/java-wegweiser/articles/Innere-und-anonyme-Klassen.html) von `ATM` realisiert werden. Implementieren Sie auch den Zugriff auf das Konto über eine `while`-Schleife mithilfe des Iterators.	
 
-## b) Branch
-Legen Sie einen neuen Branch an, den Sie so nennen wie Ihr GitHub-Benutzername ist (damit er eindeutig ist). Alle weiteren Änderungen machen Sie in Ihrem eigenen Branch.
+## c) Aufgabe 2
 
-In Eclipse wählen Sie dazu mit `Team`-Kontextmenü die Option `Switch To` und dann `New Branch`.
+Dass die Konten innerhalb des Geldautomaten gespeichert sind, ist ja keine sehr realistische Annahme. Ändern Sie den Code daher wie folgt:
 
-## c) ATM aktualisieren
-
-Als Basiscode innerhalb des Projektes finden Sie die Referenzlösung aus Übung 1. Wenn Sie lieber Ihre eigene Lösung für die Aufgabe verwenden möchten, kopieren Sie sie herein, und machen direkt einen Git-Commit, um diese erste Änderung festzuhalten.
-
-Danach erweitern Sie die ATM-Klasse um zwei Aspekte:
-
-1. Der Automat sollte verschiedene Konten verwalten können. D.h. dass Benutzer:innen im Dialog zunächst ihre Kontonummer angeben müssen, und danach den Betrag. Der Geldautomat weiß dann für alle inviduellen Benutzer:innen, wie viel Geld diese noch auf dem Konto haben.
-
-2. Der Automat verwaltet außerdem, wie viel Bargeld er noch zur Verfügung hat. D.h. auch wenn eine Benutzerin genug Geld auf dem Konto hat, kann es sein, dass sie das Geld nicht bekommt, weil der Automat leer ist. Wenn eine Auszahlung passiert ist, sollte der Automat seinen Bargeldbestand jeweils aktualisieren.
-
-Folgende Interaktionen sollten also passieren können:
-
-```
-Enter your account number: 123
-Enter the amount to withdraw: 21
-Ok, here you go!
-Enter your account number: 234
-Enter the amount to withdraw: 452
-Sorry, you don't have enough money in the bank.
-Enter your account number: 345
-Enter the amount to withdraw: 56
-Sorry, the ATM doesn't have that much cash anymore.
-```
+1. Fügen Sie eine neue Klasse `Bank` hinzu, die eine Anzahl an Konten speichern kann. Ein Geldautomat speichert dann eine Referenz auf eine Bank, anstelle der einzelnen Konten. Welcher Bank ein Geldautomat gehört, bekommt der Konstruktor des Geldautomaten übergeben. 
+2. Machen Sie die Bank nun `Iterable<Account>` und verwenden Sie innerhalb des Geldautomaten die `for`-Schleife mit Doppelpunkt (`for (Account account : bank) { ... }`) um das Konto zu suchen.
 
 ## d) Commit und Push
 Committen Sie alle Ihre Änderungen am Quellcode, und pushen Sie den neuen Branch auf das remote namens `origin` (= GitHub). 
-
-In Eclipse wählen Sie dazu `Team > Push to origin ...` oder `Team > Push branch USERNAME ...`
-
-**Achtung, Nachtrag**: Um über HTTPS pushen zu können, müssen Sie auf GitHub ein sog. *personal access token* erzeugen, und dieses anstelle Ihres Passwortes verwenden. [Hier](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) gibt es dazu eine Anleitung. Bei scopes müssen Sie nur einen Haken bei `repo` machen, alles andere kann so bleiben.
-
