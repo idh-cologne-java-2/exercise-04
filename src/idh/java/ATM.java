@@ -2,15 +2,30 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.Random;
 
-public class ATM {
+public class ATM implements Iterable<Account>  {
+
+	public Account getacc( int count) {
+		
+		
+		return accounts[count]; 
+	}
 	
 	// initial cash in the ATM
 	int cash = 100;
 
 	// accounts known to the ATM
 	Account[] accounts = new Account[5];
+	
+	public int size() {
+		return accounts.length;	
+		
+	}
+	
+	
+
 
 	public ATM() {
 		// create accounts with varying balances
@@ -68,14 +83,7 @@ public class ATM {
 		System.out.println("Ok, here is your money, enjoy!");
 
 	};
-
-	/**
-	 * Launches the ATM
-	 */
-	public static void main(String[] args) {
-		ATM atm = new ATM();
-		atm.run();
-	};
+	
 	
 	/**
 	 * Retrieves the account given an id.
@@ -90,5 +98,24 @@ public class ATM {
 		}
 		return null;
 	}
+	
+	@Override 
+	public Iterator<Account> iterator(){
+		return new AccountIterator(this);
+	}
+
+	/**
+	 * Launches the ATM
+	 */
+	
+	public static void main(String[] args) {
+		ATM atm = new ATM();
+Iterator<Account> iter = new AccountIterator(atm);
+		
+		while(iter.hasNext()) {
+			iter.next();
+		}
+		atm.run();
+	};
 
 }
