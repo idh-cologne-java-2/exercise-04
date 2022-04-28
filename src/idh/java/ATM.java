@@ -107,13 +107,15 @@ public class ATM implements Iterable<Account>  {
 	/**
 	 * Launches the ATM
 	 */
-	
+
 	public static void main(String[] args) {
 		ATM atm = new ATM();
+		//Iterator itarating over the accounts
 Iterator<Account> iter = new AccountIterator(atm);
 		
 		while(iter.hasNext()) {
 			iter.next();
+			
 		}
 		atm.run();
 	};
