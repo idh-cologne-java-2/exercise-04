@@ -19,8 +19,7 @@ public class ATM {
 	public ATM(Bank bank) {
 		//part of bank
 		owner = bank.getName();
-		
-		// create accounts with varying balances
+	
 		
 		
 	}
