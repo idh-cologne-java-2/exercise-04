@@ -23,8 +23,6 @@ public class Bank implements Iterable<Account> {
 		return new AccountIterator(this);
 	}
 	
-
-	
 	
 	public void moneten() {
 		// create accounts with varying balances
@@ -32,25 +30,6 @@ public class Bank implements Iterable<Account> {
 				for (int i = 0; i < accounts.length; i++) {
 					accounts[i] = new Account(i+1, random.nextInt(1000));
 				}
-	}
-	
-	
-	public void SetCurrentbank(Account[] s) {
-		
-		this.accounts = s ;  
-	}
-	
-	public Account[] getCurrentbank() {
-		
-		return accounts; 
-	}
-	
-	public void SetName( String name) {
-		this.bankname = name ; 
-	}
-	
-	public String getName() {
-		return bankname; 
 	}
 	
 }
