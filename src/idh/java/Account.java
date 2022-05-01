@@ -5,7 +5,7 @@ package idh.java;
  * @author reiterns
  *
  */
-public class Account {
+public class Account extends Object {
 	// the balance of the account
 	int balance;
 	
@@ -40,6 +40,14 @@ public class Account {
 	public void withdraw(int sum) {
 		this.balance = balance - sum;
 	}
+
+
+
+	
+
+
+
+
 	
 	
 }

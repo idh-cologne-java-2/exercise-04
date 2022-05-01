@@ -1,23 +1,31 @@
 package idh.java;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
+import java.util.Iterator;
 
-public class ATM {
+
+public class ATM implements Iterable<Account>{
 	
 	// initial cash in the ATM
-	int cash = 100;
+	int cash = 1000;
+	Bank a;
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
 
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	public ATM(String name) {
+		a = new Bank(name);
+	}
+	
+	@Override
+	public Iterator<Account> iterator() {
+		return new AccountIterator(this);
+	}
+	
+	public int size() {
+		return a.accounts.length;
+	}
+	
+	public Account getAccounts(int counter) {
+		return a.accounts[counter];
 	}
 	
 	/**
@@ -30,9 +38,9 @@ public class ATM {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
 			try {
-				System.out.print("Enter your account number: ");
+				System.out.print("Geben sie ihre Kontonummer ein: ");
 				int accountNumber = Integer.parseInt(br.readLine());
-				System.out.print("Enter the amount to withdraw: ");
+				System.out.print("Gib ein und ich gebe aus: ");
 				int amount = Integer.parseInt(br.readLine());
 				cashout(accountNumber, amount);
 			} catch (Exception e) {
@@ -45,27 +53,27 @@ public class ATM {
 	public void cashout(int accountNumber, int amount) {
 		// check for cash in the ATM
 		if (amount > cash) {
-			System.out.println("Sorry, not enough cash left.");
+			System.out.println("Entschuldigung, dieser Geldautomat is ‰rmer als du. \n");
 			return;
 		}
 		
 		// check for existence of the account
 		Account account = getAccount(accountNumber);
 		if (account == null) {
-			System.out.println("Sorry, this account doesn't exist.");
+			System.out.println("Dieses Konto gibt es nicht. \n");
 			return;
 		}
 		
 		// check for balance of the account
 		if (amount > account.getBalance()) {
-			System.out.println("Sorry, you're out of money.");
+			System.out.println("Entschuldigung, du bist zu arm. \n");
 			return;
 		}
 		
 		// withdraw
 		account.withdraw(amount);
-		cash += amount;
-		System.out.println("Ok, here is your money, enjoy!");
+		cash -= amount;
+		System.out.println("Ok, hier sind deine Moneten, genieﬂe! \n");
 
 	};
 
@@ -73,22 +81,30 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
+		ATM atm = new ATM("Reiba");
 		atm.run();
 	};
 	
 	/**
-	 * Retrieves the account given an id.
+	 * Retrieves the account given an id. HIER muss Iterator rein
 	 * 
 	 * @param id
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (Account account : accounts) {
-			if (account.getId() == id) 
-				return account;
+		Iterator<Account> iter = iterator();
+		Account temp;
+		while(iter.hasNext()) {
+			temp = iter.next();
+			if(temp.getId() == id) {
+				return temp;
+			}
 		}
 		return null;
 	}
+
+	
+
+
 
 }
