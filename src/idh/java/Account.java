@@ -5,6 +5,7 @@ package idh.java;
  * @author reiterns
  *
  */
+
 public class Account {
 	// the balance of the account
 	int balance;
