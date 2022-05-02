@@ -2,23 +2,13 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class ATM {
-	
+
 	// initial cash in the ATM
 	int cash = 100;
-
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
-
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
-	}
+	
+	Bank bank = new Bank();
 	
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
@@ -45,27 +35,28 @@ public class ATM {
 	public void cashout(int accountNumber, int amount) {
 		// check for cash in the ATM
 		if (amount > cash) {
-			System.out.println("Sorry, not enough cash left.");
+			System.out.println("Sorry, not enough cash left (" + cash + ").\n");
 			return;
 		}
 		
 		// check for existence of the account
 		Account account = getAccount(accountNumber);
 		if (account == null) {
-			System.out.println("Sorry, this account doesn't exist.");
+			System.out.println("Sorry, this account doesn't exist.\n");
 			return;
 		}
 		
 		// check for balance of the account
 		if (amount > account.getBalance()) {
-			System.out.println("Sorry, you're out of money.");
+			System.out.println("Sorry, you're out of money (" + account.getBalance() + ").\n");
 			return;
 		}
 		
 		// withdraw
 		account.withdraw(amount);
 		cash += amount;
-		System.out.println("Ok, here is your money, enjoy!");
+		System.out.println("Ok, here is your money, enjoy!\n");
+		//System.out.println("[Account Number: " + accountNumber + "\tAccount Balance: " + account.getBalance() + "\tATM Balance: " + cash + "]\n");
 
 	};
 
@@ -84,7 +75,7 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (Account account : accounts) {
+		for (Account account : bank) {
 			if (account.getId() == id) 
 				return account;
 		}
