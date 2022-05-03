@@ -1,19 +1,18 @@
 package idh.java;
 // Tim Schäfer 7380391
 import java.io.*;
+import java.util.Iterator;
 
 public class ATM {
 	
-	
-	BankAccount a1 = new BankAccount(67,134);
-	BankAccount a2 = new BankAccount(33,687);
-	BankAccount a3 = new BankAccount(73,354);
-	
-	BankAccount[] AccountList = {a1, a2, a3};
-	
+	Bank BankOfATM;
 	BankAccount aktivAccount;
-	int moneyInATM = 598;
+	int moneyInATM;
 	
+	public ATM(Bank BankofATM,int moneyInATM) {
+		this.BankOfATM = BankofATM;
+		this.moneyInATM = moneyInATM;
+	}
 	/**
 	 * Main command loop of the ATM
 	 * Asks the user to enter a number, and passes this number to the function cashout(...) 
@@ -28,10 +27,11 @@ public class ATM {
 			try {
 				
 				// asking for the ID
-				System.out.print("Enter your Accound-ID: ");
+				System.out.print("Welcome by "+BankOfATM.getBankName() +"\nEnter your Accound-ID: ");
 				int inputID = Integer.parseInt(br.readLine());
-				aktivAccount = findAccound(inputID);
 				
+				aktivAccount = BankOfATM.findAccount(inputID);
+				//aktivAccount = findAccountWithFor(inputID);
 				// checking if the ID is valid
 				if(aktivAccount != null) {
 					System.out.print("Enter the amount to withdraw: ");
@@ -49,22 +49,19 @@ public class ATM {
 			}
 		}
 	}
-	
-	
-	/**
+	/*
+	 *  das mit for verstehe ich noch nicht ganz
 	 * 
-	 * @return den Index der Stelle an der sich der Accound in der Liste befindet 
-	 * 			wenn nichts gefunden wird wird -1 zurückgegeben 
-	 */
-	public BankAccount findAccound(int searchedID) {
-		for(int i = 0;i < AccountList.length;i++)
-		{
-			if(AccountList[i].getAccountID() == searchedID) {
-				return AccountList[i];
+	 
+	public BankAccount findAccountWithFor(int inputID) {
+		for(BankAccount account : BankOfATM) {
+			if(account.getAccountID()== inputID) {
+				return account;
 			}
 		}
 		return null;
 	}
+	*/
 	
 	/// geld wird ausgegeben
 	public void cashout(int amount) {
@@ -92,7 +89,9 @@ public class ATM {
 	 */
 	public static void main(String[] args) {
 		
-		ATM atm = new ATM();
+		Bank bank1 = new Bank("BigMoneyBank");
+		
+		ATM atm = new ATM(bank1,534);
 		atm.run();
 	};
 };
