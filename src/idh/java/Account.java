@@ -1,10 +1,5 @@
 package idh.java;
 
-/**
- * This class represents an account in our bank.
- * @author reiterns
- *
- */
 public class Account {
 	// the balance of the account
 	int balance;
