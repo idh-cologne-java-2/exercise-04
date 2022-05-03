@@ -2,23 +2,14 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.Random;
 
 public class ATM {
 	
-	// initial cash in the ATM
-	int cash = 100;
-
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
-
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
-	}
+	Account[] accounts = new Account[5]; // Accounts sind 0-4
+	int cash = 1000;
+	Bank Volksbank = new Bank();
 	
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
@@ -43,26 +34,23 @@ public class ATM {
 	}
 
 	public void cashout(int accountNumber, int amount) {
-		// check for cash in the ATM
 		if (amount > cash) {
 			System.out.println("Sorry, not enough cash left.");
 			return;
 		}
 		
-		// check for existence of the account
 		Account account = getAccount(accountNumber);
 		if (account == null) {
 			System.out.println("Sorry, this account doesn't exist.");
 			return;
 		}
 		
-		// check for balance of the account
 		if (amount > account.getBalance()) {
 			System.out.println("Sorry, you're out of money.");
 			return;
 		}
 		
-		// withdraw
+		
 		account.withdraw(amount);
 		cash += amount;
 		System.out.println("Ok, here is your money, enjoy!");
@@ -84,11 +72,14 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (Account account : accounts) {
+		for (Account account : Volksbank) {
 			if (account.getId() == id) 
 				return account;
+			//else if (account.getId() != id){
+		    //System.out.println("Verification failed, please try again");
+			//}
 		}
 		return null;
 	}
-
-}
+	
+	}
