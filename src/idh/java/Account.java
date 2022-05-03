@@ -12,7 +12,7 @@ public class Account {
 	// the id of the account
 	int id;
 
-	public Account(int id, int status) {
+	public Account(int id, int status) { 
 		this.id = id;
 		this.balance = status;
 	}
@@ -41,5 +41,9 @@ public class Account {
 		this.balance = balance - sum;
 	}
 	
-	
+	@Override
+	public String toString () {
+		return "Der Account mit der ID: "+ id + ".";
+		
+	}
 }

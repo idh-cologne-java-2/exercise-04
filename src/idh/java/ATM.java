@@ -3,21 +3,23 @@ package idh.java;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.Iterator;
 
 public class ATM {
-	
+	String bankname;
 	// initial cash in the ATM
 	int cash = 100;
 
 	// accounts known to the ATM
 	Account[] accounts = new Account[5];
 
-	public ATM() {
+	public ATM(String bankname) {
 		// create accounts with varying balances
 		Random random = new Random();
 		for (int i = 0; i < accounts.length; i++) {
 			accounts[i] = new Account(i, random.nextInt(1000));
 		}
+		this.bankname = bankname;
 	}
 	
 	/**
@@ -73,7 +75,16 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
+		ATM atm = new ATM("Bank 1");
+		Iterator<Account> iter = new AccountIterator(atm);
+		Bank bank = new Bank(atm);
+		for (Account account : bank) {
+		System.out.println(account);	
+		}
+		while (iter.hasNext()) {
+			Account account = iter.next();
+			System.out.println(account);
+		}
 		atm.run();
 	};
 	
@@ -90,5 +101,4 @@ public class ATM {
 		}
 		return null;
 	}
-
 }
