@@ -2,24 +2,34 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
+import java.util.*;
 
-public class ATM {
+
+public class ATM implements Iterable<Account> {
+	Bank newBank ; 
 	
-	// initial cash in the ATM
-	int cash = 100;
+	@Override
+	public Iterator<Account> iterator() {
+		// TODO Auto-generated method stub
+		return new AccountIterator(this);
+	};
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
-
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	
+	private int ATMBalance = 2000; 
+	
+	
+	public Account getAcc( int count) {
+		return newBank.getCurrentbank()[count];
 	}
 	
+	public int getSize() {
+		return newBank.getCurrentbank().length;
+	}
+	
+	public ATM() {
+		newBank = new Bank();	
+	}
+
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
 	 * number to the function cashout(...) which actually does the calculation and
@@ -28,44 +38,45 @@ public class ATM {
 	 */
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		while (true) {
 			try {
-				System.out.print("Enter your account number: ");
-				int accountNumber = Integer.parseInt(br.readLine());
+				System.out.print(" Please Enter your Account ID:  "); 
+				int currentID = Integer.parseInt(br.readLine());
+					 Account currentacc = newBank.getCurrentbank()[0] ; 
+				Iterator<Account> iter = iterator();
+				 while(iter.hasNext()) {
+					 currentacc = iter.next();
+					 if(currentID == currentacc.id) {
+						break;
+						} 
+					 if(!iter.hasNext()) {
+							System.err.println("Wrong ID please Try again ..\n ");
+							run(); 
+					 } 
+				 }
 				System.out.print("Enter the amount to withdraw: ");
 				int amount = Integer.parseInt(br.readLine());
-				cashout(accountNumber, amount);
+				cashout(amount , currentID,currentacc);
 			} catch (Exception e) {
-				e.printStackTrace();
 				break;
 			}
 		}
 	}
 
-	public void cashout(int accountNumber, int amount) {
-		// check for cash in the ATM
-		if (amount > cash) {
-			System.out.println("Sorry, not enough cash left.");
-			return;
-		}
+	public void cashout(int amount , int currentID, Account s) {
 		
-		// check for existence of the account
-		Account account = getAccount(accountNumber);
-		if (account == null) {
-			System.out.println("Sorry, this account doesn't exist.");
-			return;
-		}
+		if( amount > ATMBalance) {
+			System.err.print("Sorry there is not enough money in the ATM"); 
+		} else {
+			if( amount > s.balance) {
+				System.err.println("Sorry you dont have enough money");
+			}else {
+				s.withdraw(amount);
+				System.out.print("You cashed out:  " + amount); 			
+			}
+			}
 		
-		// check for balance of the account
-		if (amount > account.getBalance()) {
-			System.out.println("Sorry, you're out of money.");
-			return;
-		}
-		
-		// withdraw
-		account.withdraw(amount);
-		cash += amount;
-		System.out.println("Ok, here is your money, enjoy!");
 
 	};
 
@@ -75,20 +86,9 @@ public class ATM {
 	public static void main(String[] args) {
 		ATM atm = new ATM();
 		atm.run();
-	};
-	
-	/**
-	 * Retrieves the account given an id.
-	 * 
-	 * @param id
-	 * @return
-	 */
-	protected Account getAccount(int id) {
-		for (Account account : accounts) {
-			if (account.getId() == id) 
-				return account;
-		}
-		return null;
+		
 	}
+
+	
 
 }
