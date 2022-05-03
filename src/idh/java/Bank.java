@@ -28,17 +28,9 @@ public class Bank implements Iterable<Account>{
 		return accounts.length;
 	}
 	
-	public Account gettheAccount(int zaehler) {
+	public Account getAccount(int zaehler) {
 		return accounts[zaehler];
 	}
-
-// create accounts
-//	public void fillAcc() {
-//		Random r = new Random();
-//		for(int i = 0; i < accounts.length; i++) {
-//			accounts[i] = new Account(i+1, r.nextInt(1000));
-//		}
-//	}
 
 
 }

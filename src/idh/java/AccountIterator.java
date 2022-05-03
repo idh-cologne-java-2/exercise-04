@@ -20,7 +20,7 @@ public class AccountIterator implements Iterator<Account> {
 
 	@Override
 	public Account next() {
-		return bank.gettheAccount(counter++);
+		return bank.getAccount(counter++);
 	}
 
 }
