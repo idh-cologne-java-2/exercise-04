@@ -2,6 +2,7 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.Random;
 
 public class ATM {
@@ -11,8 +12,12 @@ public class ATM {
 
 	// accounts known to the ATM
 	Account[] accounts = new Account[5];
+	Bank bank;
 
-	public ATM() {
+	private String provider; //ATM-Betreibe
+
+	public ATM(Bank bank) {
+		this.provider = bank.getName();
 		// create accounts with varying balances
 		Random random = new Random();
 		for (int i = 0; i < accounts.length; i++) {
@@ -20,6 +25,11 @@ public class ATM {
 		}
 	}
 	
+	public void iterateOverAccounts() {
+		for(Account a : bank) {
+			System.out.println(a.getId());
+		}
+	}
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
 	 * number to the function cashout(...) which actually does the calculation and
@@ -73,7 +83,8 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
+		Bank bank = new Bank("Cashgroup");
+		ATM atm = new ATM(bank);
 		atm.run();
 	};
 	
@@ -84,11 +95,44 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (Account account : accounts) {
-			if (account.getId() == id) 
-				return account;
+		
+		
+		//Aufgabe 1
+		Iterator<Account> iter = new AccountIterator(accounts);
+		while(iter.hasNext()) {
+			Account a = iter.next();
+//			System.out.println(a.getId());
+			return a;
 		}
+		
+//		for (Account account : accounts) {
+//			if (account.getId() == id) 
+//				return account;
+//		}
 		return null;
+	}
+	
+	public class AccountIterator implements Iterator<Account> {
+
+		Account[] a;
+		int counter;
+		
+		public AccountIterator(Account[] a) {
+			this.a = a;
+			counter = 0;
+			
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return counter < a.length;
+		}
+
+		@Override
+		public Account next() {
+			return a[counter++];
+		}
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-Softwaretechnologie: Java 2
+twaretechnologie: Java 2
 
 # Übung 4
 

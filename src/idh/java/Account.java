@@ -3,13 +3,12 @@ package idh.java;
 /**
  * This class represents an account in our bank.
  * @author reiterns
+ * @author alawal //modified
  *
  */
 public class Account {
-	// the balance of the account
+
 	int balance;
-	
-	// the id of the account
 	int id;
 
 	public Account(int id, int status) {
