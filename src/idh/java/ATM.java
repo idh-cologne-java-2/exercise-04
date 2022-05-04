@@ -1,30 +1,19 @@
-/**
- * @author UntoastedToast
- *
- */
-
 package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class ATM {
-	
+
 	// initial cash in the ATM
 	int cash = 100;
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
+	Bank bank;
 
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	public ATM(Bank bank) {
+		this.bank = bank;
 	}
-	
+
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
 	 * number to the function cashout(...) which actually does the calculation and
@@ -35,6 +24,7 @@ public class ATM {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
 			try {
+				System.out.println("Welcome to The Financial Crimes");
 				System.out.print("Enter your account number: ");
 				int accountNumber = Integer.parseInt(br.readLine());
 				System.out.print("Enter the amount to withdraw: ");
@@ -53,20 +43,20 @@ public class ATM {
 			System.out.println("Sorry, not enough cash left.");
 			return;
 		}
-		
+
 		// check for existence of the account
 		Account account = getAccount(accountNumber);
 		if (account == null) {
 			System.out.println("Sorry, this account doesn't exist.");
 			return;
 		}
-		
+
 		// check for balance of the account
 		if (amount > account.getBalance()) {
 			System.out.println("Sorry, you're out of money.");
 			return;
 		}
-		
+
 		// withdraw
 		account.withdraw(amount);
 		cash += amount;
@@ -78,10 +68,11 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
+		Bank bank = new Bank();
+		ATM atm = new ATM(bank);
 		atm.run();
 	};
-	
+
 	/**
 	 * Retrieves the account given an id.
 	 * 
@@ -89,8 +80,8 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (Account account : accounts) {
-			if (account.getId() == id) 
+		for (Account account : bank) {
+			if (account.getId() == id)
 				return account;
 		}
 		return null;
