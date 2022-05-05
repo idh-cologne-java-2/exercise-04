@@ -7,8 +7,8 @@ public class AccountIterator implements Iterator<BankAccount> {
 	BankAccount[] AccountList;
 	int counter = 0;
 	
-	AccountIterator(Bank AccountList){
-		this.AccountList = AccountList.getAccountList();
+	AccountIterator(BankAccount[] AccountList){
+		this.AccountList = AccountList;
 	}
 	
 	@Override

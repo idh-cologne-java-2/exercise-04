@@ -28,7 +28,7 @@ public class Bank implements Iterable<BankAccount>{
 	
 	public BankAccount findAccount(int searchedID) {
 		
-		Iterator<BankAccount> iter = new AccountIterator(this);
+		Iterator<BankAccount> iter = new AccountIterator(AccountList);
 		BankAccount LookAccount;
 		
 		while(iter.hasNext()) {
@@ -45,7 +45,7 @@ public class Bank implements Iterable<BankAccount>{
 	@Override
 	public Iterator<BankAccount> iterator() {
 		
-		return new AccountIterator(this);
+		return new AccountIterator(AccountList);
 	}
 	
 }

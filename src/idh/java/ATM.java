@@ -30,8 +30,8 @@ public class ATM {
 				System.out.print("Welcome by "+BankOfATM.getBankName() +"\nEnter your Accound-ID: ");
 				int inputID = Integer.parseInt(br.readLine());
 				
-				aktivAccount = BankOfATM.findAccount(inputID);
-				//aktivAccount = findAccountWithFor(inputID);
+				//aktivAccount = BankOfATM.findAccount(inputID);
+				aktivAccount = findAccountWithFor(inputID);
 				// checking if the ID is valid
 				if(aktivAccount != null) {
 					System.out.print("Enter the amount to withdraw: ");
@@ -52,7 +52,7 @@ public class ATM {
 	/*
 	 *  das mit for verstehe ich noch nicht ganz
 	 * 
-	 
+	 */
 	public BankAccount findAccountWithFor(int inputID) {
 		for(BankAccount account : BankOfATM) {
 			if(account.getAccountID()== inputID) {
@@ -61,7 +61,7 @@ public class ATM {
 		}
 		return null;
 	}
-	*/
+	
 	
 	/// geld wird ausgegeben
 	public void cashout(int amount) {
