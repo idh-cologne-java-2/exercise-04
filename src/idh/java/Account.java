@@ -6,11 +6,9 @@ package idh.java;
  *
  */
 public class Account {
-	// the balance of the account
-	int balance;
 	
-	// the id of the account
-	int id;
+	int balance; // the balance of the account
+	int id; // the id of the account
 
 	public Account(int id, int status) {
 		this.id = id;
