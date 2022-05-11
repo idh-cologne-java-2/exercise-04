@@ -2,24 +2,14 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
+import java.util.Iterator;
 
 public class ATM {
 	
 	// initial cash in the ATM
-	int cash = 100;
+	int cash = 10000;
+	Bank sparkasse = new Bank();
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
-
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
-	}
-	
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
 	 * number to the function cashout(...) which actually does the calculation and
@@ -67,7 +57,7 @@ public class ATM {
 		cash += amount;
 		System.out.println("Ok, here is your money, enjoy!");
 
-	};
+	}
 
 	/**
 	 * Launches the ATM
@@ -75,16 +65,17 @@ public class ATM {
 	public static void main(String[] args) {
 		ATM atm = new ATM();
 		atm.run();
-	};
+	}
 	
 	/**
 	 * Retrieves the account given an id.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id Account number
+	 * @return Account object
 	 */
 	protected Account getAccount(int id) {
-		for (Account account : accounts) {
+		for (Iterator<Account> it = sparkasse.iterator(); it.hasNext(); ) {
+			Account account = it.next();
 			if (account.getId() == id) 
 				return account;
 		}

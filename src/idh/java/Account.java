@@ -35,10 +35,10 @@ public class Account {
 	
 	/**
 	 * Withdraws a sum of money from the account
-	 * @param sum
+	 * @param sum Sum to withdraw
 	 */
 	public void withdraw(int sum) {
-		this.balance = balance - sum;
+		setBalance(balance - sum);
 	}
 	
 	
